@@ -39,7 +39,7 @@ export default function Home() {
       <header className="p-4 border-b bg-card/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto flex items-center gap-4">
           <Logo />
-          <h1 className="text-2xl font-headline font-bold text-primary">Headshot Styler AI</h1>
+          <h1 className="text-2xl font-headline font-bold text-primary">KS Headshot Styler</h1>
         </div>
       </header>
       <main className="flex-grow container mx-auto p-4 md:p-8">

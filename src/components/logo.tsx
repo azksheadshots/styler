@@ -6,6 +6,7 @@ export function Logo() {
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
       className="text-primary"
+      aria-label="KS Headshot Styler Logo"
     >
       <g transform="rotate(15 50 50)">
         <path
@@ -17,8 +18,18 @@ export function Logo() {
           strokeLinejoin="round"
         />
         <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="8" fill="none" />
-        <circle cx="50" cy="50" r="10" fill="currentColor" />
       </g>
+      <text 
+        x="50" 
+        y="60" 
+        fontFamily="Arial, sans-serif"
+        fontSize="35" 
+        fontWeight="bold"
+        fill="currentColor"
+        textAnchor="middle"
+      >
+        KS
+      </text>
     </svg>
   );
 }

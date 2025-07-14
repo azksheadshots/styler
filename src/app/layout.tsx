@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Headshot Styler AI',
+  title: 'KS Headshot Styler',
   description: 'AI-powered clothing suggestions for your professional headshots.',
 };
 
