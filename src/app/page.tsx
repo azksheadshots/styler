@@ -36,17 +36,15 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="p-4 border-b bg-card/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto flex items-center gap-4">
-          <Logo />
-          <h1 className="text-2xl font-headline font-bold text-primary">KS Headshot Styler</h1>
-        </div>
-      </header>
       <main className="flex-grow container mx-auto p-4 md:p-8">
         <div className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-4">
-            <Card className="sticky top-24">
+            <Card className="sticky top-8">
               <CardContent className="p-6">
+                <div className="flex items-center gap-4 mb-6">
+                    <Logo />
+                    <h1 className="text-2xl font-headline font-bold text-primary">KS Headshot Styler</h1>
+                </div>
                 <StyleForm onSubmit={onFormSubmit} isLoading={isLoading} />
               </CardContent>
             </Card>
