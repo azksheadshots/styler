@@ -18,7 +18,7 @@ import { Sparkles, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   role: z.string().min(2, "Role is required."),
-  stylePreferences: z.string().min(10, "Please describe your style preferences."),
+  stylePreferences: z.string().min(1, "Style preferences are required."),
 });
 
 type StyleFormValues = z.infer<typeof formSchema>;
