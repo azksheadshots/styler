@@ -34,21 +34,6 @@ export async function suggestClothingStyles(
   return suggestClothingStylesFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'suggestClothingStylesPrompt',
-  input: {schema: SuggestClothingStylesInputSchema},
-  output: {schema: SuggestClothingStylesOutputSchema},
-  prompt: `You are a professional stylist helping a user choose the best clothing for their headshot.
-
-Based on the user's role and personal style preferences, suggest a list of clothing items appropriate for a professional headshot. Provide reasoning for your suggestions.
-
-Role: {{{role}}}
-Style Preferences: {{{stylePreferences}}}
-
-Respond with a bulleted or numbered list of clothing suggestions and the reasoning.
-`,
-});
-
 const suggestClothingStylesFlow = ai.defineFlow(
   {
     name: 'suggestClothingStylesFlow',
@@ -56,7 +41,17 @@ const suggestClothingStylesFlow = ai.defineFlow(
     outputSchema: SuggestClothingStylesOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const {output} = await ai.generate({
+      prompt: `You are a professional stylist helping a user choose the best clothing for their headshot.
+
+      Based on the user's role and personal style preferences, suggest a list of clothing items appropriate for a professional headshot. Provide reasoning for your suggestions.
+
+      Role: ${input.role}
+      Style Preferences: ${input.stylePreferences}
+
+      Respond with a bulleted or numbered list of clothing suggestions and the reasoning.`,
+      output: { schema: SuggestClothingStylesOutputSchema },
+    });
     return output!;
   }
 );
