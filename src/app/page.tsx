@@ -41,10 +41,6 @@ export default function Home() {
           <div className="lg:col-span-4">
             <Card className="sticky top-8">
               <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-6">
-                    <Logo />
-                    <h1 className="text-2xl font-headline font-bold text-primary">KS Headshot Styler</h1>
-                </div>
                 <StyleForm onSubmit={onFormSubmit} isLoading={isLoading} />
               </CardContent>
             </Card>
