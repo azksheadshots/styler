@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
+      },
       fontFamily: {
         body: ['Inter', 'sans-serif'],
         headline: ['"Space Grotesk"', 'sans-serif'],
