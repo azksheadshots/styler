@@ -18,7 +18,6 @@ const ImproveSuggestionsWithFeedbackInputSchema = z.object({
     .describe(
       'User feedback on the suggestion, including what they liked or disliked.'
     ),
-  industry: z.string().describe('The industry of the headshot.'),
   role: z.string().describe('The role of the person in the headshot.'),
   stylePreferences: z.string().describe('The style preferences of the user.'),
   rating: z.number().min(1).max(5).describe('The user rating of the suggestion from 1 to 5.'),
@@ -52,11 +51,10 @@ const prompt = ai.definePrompt({
 
 Analyze the user's feedback on the AI's suggestion, and summarize how the model can be improved for future suggestions.
 
-Consider the user's industry, role, and style preferences when determining how to improve the model.
+Consider the user's role and style preferences when determining how to improve the model.
 
 Suggestion: {{{suggestion}}}
 Feedback: {{{feedback}}}
-Industry: {{{industry}}}
 Role: {{{role}}}
 Style Preferences: {{{stylePreferences}}}
 Rating: {{{rating}}}

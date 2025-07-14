@@ -17,7 +17,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Sparkles, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  industry: z.string().min(2, "Industry is required."),
   role: z.string().min(2, "Role is required."),
   stylePreferences: z.string().min(10, "Please describe your style preferences."),
 });
@@ -33,7 +32,6 @@ export function StyleForm({ onSubmit, isLoading }: StyleFormProps) {
   const form = useForm<StyleFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      industry: "",
       role: "",
       stylePreferences: "",
     },
@@ -48,19 +46,6 @@ export function StyleForm({ onSubmit, isLoading }: StyleFormProps) {
             Tell us about your profession and preferences for a tailored look.
             </p>
         </div>
-        <FormField
-          control={form.control}
-          name="industry"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Industry</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g., Technology, Finance, Arts" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="role"

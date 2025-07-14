@@ -29,6 +29,7 @@ const ClothingImage = ({ item }: { item: string }) => {
         setImageUrl(result.imageUrl);
       } catch (error) {
         console.error("Failed to generate image for", item, error);
+        // Fallback to a placeholder if generation fails
         setImageUrl(`https://placehold.co/400x400.png`);
       } finally {
         setIsLoading(false);
@@ -49,6 +50,7 @@ const ClothingImage = ({ item }: { item: string }) => {
             width={400}
             height={400}
             className="rounded-lg object-cover"
+            data-ai-hint="clothing item"
           />
         )}
         <p className="mt-4 text-center font-medium text-sm">{item}</p>
@@ -82,7 +84,6 @@ export function StyleSuggestions({ suggestion, input }: StyleSuggestionsProps) {
       await handleFeedback({
         suggestion: suggestion.clothingSuggestions,
         feedback,
-        industry: input.industry,
         role: input.role,
         stylePreferences: input.stylePreferences,
         rating,
