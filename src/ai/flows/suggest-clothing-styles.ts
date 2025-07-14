@@ -22,7 +22,7 @@ const SuggestClothingStylesOutputSchema = z.object({
   clothingSuggestions: z
     .string()
     .describe(
-      'A list of suggested clothing styles, tailored to the user’s role and style preferences.'
+      'A list of suggested clothing styles, tailored to the user’s role and style preferences. Each suggestion should be on a new line.'
     ),
   reasoning: z.string().describe('The reasoning behind the suggested clothing styles.'),
 });
@@ -49,7 +49,8 @@ const suggestClothingStylesFlow = ai.defineFlow(
       Role: ${input.role}
       Style Preferences: ${input.stylePreferences}
 
-      Respond with a bulleted or numbered list of clothing suggestions and the reasoning.`,
+      For the 'clothingSuggestions' field, respond with a list of items. Each item must be on a new line. Do not use any special formatting like bullet points, numbers, or asterisks.
+      For the 'reasoning' field, provide a brief explanation for your choices.`,
       output: { schema: SuggestClothingStylesOutputSchema },
     });
     return output!;
