@@ -12,9 +12,9 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const SuggestClothingStylesInputSchema = z.object({
-  role: z.string().describe('The user’s job role (e.g., software engineer, manager, designer).'),
+  role: z.string().describe('The user’s job role.'),
   stylePreferences:
-    z.string().describe('The user’s personal style preferences (e.g., modern, classic, casual).'),
+    z.string().describe('The user’s personal style preferences.'),
 });
 export type SuggestClothingStylesInput = z.infer<typeof SuggestClothingStylesInputSchema>;
 
@@ -38,14 +38,14 @@ const prompt = ai.definePrompt({
   name: 'suggestClothingStylesPrompt',
   input: {schema: SuggestClothingStylesInputSchema},
   output: {schema: SuggestClothingStylesOutputSchema},
-  prompt: `You are a professional stylist helping users choose the best clothing for their headshots.
+  prompt: `You are a professional stylist helping a user choose the best clothing for their headshot.
 
-Based on the user's role and personal style preferences, suggest clothing styles appropriate for a professional headshot. Provide reasoning for your suggestions.
+Based on the user's role and personal style preferences, suggest a list of clothing items appropriate for a professional headshot. Provide reasoning for your suggestions.
 
 Role: {{{role}}}
 Style Preferences: {{{stylePreferences}}}
 
-Respond with clothing suggestions and reasoning.
+Respond with a bulleted or numbered list of clothing suggestions and the reasoning.
 `,
 });
 
