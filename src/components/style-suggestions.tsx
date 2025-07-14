@@ -91,7 +91,7 @@ export function StyleSuggestions({ suggestion, input }: StyleSuggestionsProps) {
                       <Card>
                         <CardContent className="flex flex-col aspect-square items-center justify-center p-2">
                            <Image
-                            src={`https://placehold.co/400x400.png`}
+                            src={`https://placehold.co/400x400`}
                             alt={item}
                             width={400}
                             height={400}
