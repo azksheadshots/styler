@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,12 +9,53 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { ThumbsUp, ThumbsDown, Printer, Send, Loader2 } from 'lucide-react';
 import type { SuggestClothingStylesOutput, SuggestClothingStylesInput } from '@/ai/flows/suggest-clothing-styles';
-import { handleFeedback } from '@/app/actions';
+import { handleFeedback, handleImageGeneration } from '@/app/actions';
+import { Skeleton } from './ui/skeleton';
 
 interface StyleSuggestionsProps {
   suggestion: SuggestClothingStylesOutput;
   input: SuggestClothingStylesInput;
 }
+
+const ClothingImage = ({ item }: { item: string }) => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function generateImage() {
+      setIsLoading(true);
+      try {
+        const result = await handleImageGeneration({ clothingDescription: item });
+        setImageUrl(result.imageUrl);
+      } catch (error) {
+        console.error("Failed to generate image for", item, error);
+        setImageUrl(`https://placehold.co/400x400.png`);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    generateImage();
+  }, [item]);
+
+  return (
+    <Card>
+      <CardContent className="flex flex-col aspect-square items-center justify-center p-2">
+        {isLoading || !imageUrl ? (
+          <Skeleton className="h-full w-full rounded-lg" />
+        ) : (
+          <Image
+            src={imageUrl}
+            alt={item}
+            width={400}
+            height={400}
+            className="rounded-lg object-cover"
+          />
+        )}
+        <p className="mt-4 text-center font-medium text-sm">{item}</p>
+      </CardContent>
+    </Card>
+  );
+};
 
 export function StyleSuggestions({ suggestion, input }: StyleSuggestionsProps) {
   const { toast } = useToast();
@@ -88,19 +129,7 @@ export function StyleSuggestions({ suggestion, input }: StyleSuggestionsProps) {
                 {suggestedItems.map((item, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
-                      <Card>
-                        <CardContent className="flex flex-col aspect-square items-center justify-center p-2">
-                           <Image
-                            src={`https://placehold.co/400x400`}
-                            alt={item}
-                            width={400}
-                            height={400}
-                            className="rounded-lg object-cover"
-                            data-ai-hint={item.split(' ').slice(0, 2).join(' ')}
-                          />
-                          <p className="mt-4 text-center font-medium text-sm">{item}</p>
-                        </CardContent>
-                      </Card>
+                      <ClothingImage item={item} />
                     </div>
                   </CarouselItem>
                 ))}
