@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Make GOOGLE_API_KEY available to the server environment
+  env: {
+    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+  }
 };
 
 export default nextConfig;
